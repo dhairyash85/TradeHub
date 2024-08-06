@@ -1,7 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../Component/NavBar";
+import axiosInstance from "../Utils/Axios";
+
 const Signin = () => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
+  const handleUpdate = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const signin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.post("/auth/login", { email: formData.email, password: formData.password });
+      localStorage.setItem("token", response.data.token);
+      console.log(response);
+      navigate("/home"); // Redirect to a dashboard or home page after login
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div>
       <NavBar />
@@ -18,6 +38,8 @@ const Signin = () => {
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
                   type="email"
+                  name="email"
+                  onChange={handleUpdate}
                   className="peer h-full w-full rounded-md border border-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                   placeHolder=" "
                 />
@@ -28,6 +50,8 @@ const Signin = () => {
               <div className="relative h-11 w-full min-w-[200px]">
                 <input
                   type="password"
+                  name="password"
+                  onChange={handleUpdate}
                   className="peer h-full w-full rounded-md border border-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                   placeHolder=" "
                 />
@@ -37,6 +61,7 @@ const Signin = () => {
               </div>
             </div>
             <button
+            onClick={signin}
             className="mt-6 block w-full select-none rounded-lg bg-purple-700 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-purple-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
               data-ripple-light="true"
