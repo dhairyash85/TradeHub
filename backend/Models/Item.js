@@ -1,8 +1,10 @@
 import mongoose, {Schema} from "mongoose";
 const Item=new Schema({
-    name:{type:String,required:true},
-    ownerEmail:{type:String,required:true,unique:true},
-    originalCost:{type:Number,required:true},
+    name:{type:String},
+    title:{type:String},
+    description:{type:String},
+    ownerEmail:{type:String},
+    originalCost:{type:Number},
     image:[{type:String}],
     category:{type:String}
 })

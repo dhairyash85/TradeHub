@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import AuthRoutes from './Routes/AuthRoutes.js'; // Make sure to add .js extension
 import ItemRoutes from "./Routes/ItemRoutes.js"
+import RequestRoutes from "./Routes/RequestRoutes.js"
 
 const corsOptions = {
   origin: ["http://localhost:3000"],
@@ -29,6 +30,7 @@ mongoose.connect(uri)
 
 app.use("/api/auth", AuthRoutes);
 app.use("/api/item", ItemRoutes);
+app.use("/api/request", RequestRoutes);
 
 const port = 5000;
 app.listen(port, () => {

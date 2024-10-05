@@ -5,7 +5,7 @@ const NavBar = () => {
   return (
     <header className="container">
             <nav
-                className="flex justify-between md:justify-around py-4 bg-white/80 backdrop-blur-md shadow-md w-full px-10 fixed top-0 left-0 right-0 z-10 px-8 md:px-3">
+                className="flex justify-between md:justify-around py-4 bg-white/80 backdrop-blur-md shadow-md w-full px-10 fixed top-0 left-0 right-0 z-10  md:px-3">
                 <div className="flex items-center">
                     <Link to={`${localStorage.getItem('token')?"/home":"/"}`} className="cursor-pointer">
                         <h3 className="text-2xl font-medium text-blue-500">
@@ -17,7 +17,7 @@ const NavBar = () => {
                 <div
                     className="items-center md:space-x-8 justify-center justify-items-start md:justify-items-center md:flex md:pt-2 w-full left-0 top-16 px-5 md:px-10 py-3 md:py-0 border-t md:border-t-0">
                     <Link
-                    to='/'
+                    to={localStorage.getItem('token')?"/home":"/"}
                         className="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
                         Home
                     </Link>
@@ -28,6 +28,12 @@ const NavBar = () => {
                     </Link>
     
                     <Link
+                    to='/upload'
+                        className="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
+                        Upload
+                    </Link>
+                    <Link
+                        to='/profile'
                         className="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
                         My Profile
                     </Link>
@@ -39,7 +45,7 @@ const NavBar = () => {
                     </Link>
                 </div>
                 
-                <div className="flex items-center space-x-5 hidden md:flex">
+                <div className="flex items-center space-x-5 md:flex">
                     {!localStorage.getItem("token")?(<Link
                     to="/register"
                         className="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
@@ -68,7 +74,7 @@ const NavBar = () => {
                     {!localStorage.getItem("token")?(
                         <Link
                         to="/signin"
-                            className="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold text-blue-600">
+                            className="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold ">
                             <svg
                                 className="fill-current h-5 w-5 mr-2 mt-0.5"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +92,7 @@ const NavBar = () => {
                     ):(
                         <Link
                     to="/cart"
-                        className="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold text-blue-600">
+                        className="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold ">
                         
     
                         Cart

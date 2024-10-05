@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../Component/NavBar";
 import Card from "../Component/Card";
 import { Navigate } from "react-router-dom";
+import axiosInstance from "../Utils/Axios";
 
 const HomePage = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  if(!localStorage.getItem("token")){
-    Navigate("/")
+  const [items, setItems] = useState([]);
+
+  
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const res = await axiosInstance.post("/item",{},{headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}});
+        setItems(res.data.item);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+    fetchItems();
+  }, []);
+  if (!localStorage.getItem("token")) {
+    return <Navigate to="/" />;
   }
   return (
     <div className="bg-white">
@@ -260,16 +276,12 @@ const HomePage = () => {
             </div>
           </div>
           <div className="mt-16">
-            <h3 className="text-gray-600 text-2xl font-medium">Products</h3>
+          <h3 className="text-gray-600 text-2xl font-medium">Products</h3>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+              {items && 
+                items.map((item) => (
+                  <Card key={item.id} item={item} />
+                ))}
             </div>
           </div>
         </div>
