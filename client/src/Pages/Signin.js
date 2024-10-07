@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../Component/NavBar";
 import axiosInstance from "../Utils/Axios";
-
 const Signin = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -59,6 +58,7 @@ const Signin = () => {
                   Password
                 </label>
               </div>
+        
             </div>
             <button
             onClick={signin}

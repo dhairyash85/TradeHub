@@ -13,7 +13,7 @@ const LandingPage = () => {
         rel="stylesheet"
       />
 
-      <main className="flex flex-col items-center justify-center mt-32">
+      <main className="flex flex-col items-center justify-center mt-32 bg-white">
         <NavBar />
 
         <section className="flex flex-wrap items-center  font-sans px-4 mx-auto w-full lg:max-w-screen-lg sm:max-w-screen-sm md:max-w-screen-md pb-20">

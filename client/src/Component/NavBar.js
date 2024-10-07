@@ -22,10 +22,6 @@ const NavBar = () => {
                         Home
                     </Link>
     
-                    <Link
-                        className="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
-                        Wish List
-                    </Link>
     
                     <Link
                     to='/upload'
@@ -40,8 +36,9 @@ const NavBar = () => {
     
     
                     <Link
+                    to='/chatbot'
                         className="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
-                        About Us
+                        ChatBot
                     </Link>
                 </div>
                 
@@ -91,11 +88,11 @@ const NavBar = () => {
                         </Link>
                     ):(
                         <Link
-                    to="/cart"
-                        className="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold ">
+                    to="/approvedRequests"
+                        className="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold min-w-max">
                         
     
-                        Cart
+                        Approved Requests
                     </Link>
                     )}
                 </div>

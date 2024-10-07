@@ -6,7 +6,8 @@ const Item=new Schema({
     ownerEmail:{type:String},
     originalCost:{type:Number},
     image:[{type:String}],
-    category:{type:String}
+    category:{type:String},
+    location:{type:String}
 })
 
 export default mongoose.model("Item", Item)

@@ -5,7 +5,7 @@ import Request from '../Models/Request.js';
 import { Mongoose, Schema } from 'mongoose';
 
 export const AddItem=async(req, res)=>{
-    const {originalCost, image, title, description}=req.body
+    const {originalCost, image, title, description, category}=req.body
     try{
         const token = req.headers['authorization']?.split(' ')[1]
         const verify=jwt.verify(token, 'your_jwt_secret')
@@ -13,7 +13,8 @@ export const AddItem=async(req, res)=>{
         const user=await User.findOne({email:verify.email})
         const ownerEmail=user.email
         const name=user.name
-        const item = await Item.create({"name":name, "originalCost":originalCost, "ownerEmail":ownerEmail, "title":title, "description":description, "image":image})
+        const location=user.location
+        const item = await Item.create({"name":name, "originalCost":originalCost, "ownerEmail":ownerEmail, "title":title, "description":description, "image":image, "category":category, location: location})
         console.log(item)
         return res.send({success:true, user: item})
     }catch(err){
@@ -25,7 +26,7 @@ export const getAllItems=async(req, res)=>{
     try{
         const token = req.headers['authorization']?.split(' ')[1]
         const verify=jwt.verify(token, 'your_jwt_secret')
-        const item = await Item.find({ownerEmail:{$ne:verify.email}})
+        const item = await Item.find({ownerEmail:{$ne:verify.email}, })
         return res.send({success:true, item: item})
     }catch(err){
         console.log("error ", err)

@@ -2,7 +2,7 @@ import User from "../Models/User.js"
 import jwt from 'jsonwebtoken';
 
 export const Register=async(req, res)=>{
-    const {name, phone, email, password}=req.body
+    const {name, phone, email, password, location}=req.body
     try{
         const check = await User.find({
             $or: [
@@ -14,7 +14,7 @@ export const Register=async(req, res)=>{
             console.log(check)
             return res.status(400).json({message: "Email or Phone already exist"})
           }
-        const user = await User.create({name, email, password, phone})
+        const user = await User.create({name, email, password, phone, location})
         return res.send({success:true, user: user})
     }catch(err){
         return res.status(400).send({success:false, message:err.message})

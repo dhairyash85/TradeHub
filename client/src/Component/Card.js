@@ -27,6 +27,7 @@ const Card = (item) => {
                 </div>
                 <div className="px-5 py-3">
                   <h3 className="text-gray-700 uppercase">{item.item.title}</h3>
+                  <h3 className="text-gray-500 mt-2">{item.item.category[0].toUpperCase()+item.item.category.slice(1)}</h3>
                   <span className="text-gray-500 mt-2">Original Cost- ₹{item.item.originalCost}</span>
                 </div>
               </div>
